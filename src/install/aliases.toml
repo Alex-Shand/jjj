@@ -1,0 +1,2 @@
+install = ['util', 'exec', '--', 'jjj', 'install']
+update = ['util', 'exec', '--', 'jjj', 'update']

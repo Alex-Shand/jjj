@@ -1,12 +1,22 @@
 use std::{fmt::Display, process::Command};
 
 use anyhow::Result;
+use camino::Utf8PathBuf as PathBuf;
 use command_ext::CommandExt as _;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub(crate) struct Bookmark {
     pub(crate) name: String,
+}
+
+pub(crate) fn config_path() -> Result<PathBuf> {
+    Ok(PathBuf::from(
+        Command::new("jj")
+            .args(["config", "path", "--user"])
+            .check_output()?
+            .trim(),
+    ))
 }
 
 pub(crate) fn new() -> Result<()> {

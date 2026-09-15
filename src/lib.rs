@@ -21,7 +21,15 @@
 
 use anyhow::Result;
 
+mod backup;
+mod branch;
+mod gc;
+mod install;
 mod jj;
+mod pull;
+mod push;
+mod stash;
+mod switch;
 mod update;
 mod util;
 
@@ -36,12 +44,15 @@ pub struct Args {
 #[derive(Debug, argh::FromArgs)]
 #[argh(subcommand)]
 enum Command {
+    Install(install::Args),
     Update(update::Args),
-    // Stash(stash::Args),
-    // Push(push::Args),
-    // Pull(pull::Args),
-    // Switch(switch::Args),
-    // Branch(branch::Args),
+    Stash(stash::Args),
+    Backup(backup::Args),
+    Gc(gc::Args),
+    Push(push::Args),
+    Pull(pull::Args),
+    Branch(branch::Args),
+    Switch(switch::Args),
 }
 
 #[allow(missing_docs)]
@@ -49,6 +60,14 @@ enum Command {
 #[allow(clippy::missing_panics_doc)]
 pub fn main(Args { command }: Args) -> Result<()> {
     match command {
+        Command::Install(args) => install::main(args),
         Command::Update(args) => update::main(args),
+        Command::Stash(_) => todo!(),
+        Command::Backup(_) => todo!(),
+        Command::Gc(_) => todo!(),
+        Command::Push(_) => todo!(),
+        Command::Pull(_) => todo!(),
+        Command::Branch(_) => todo!(),
+        Command::Switch(_) => todo!(),
     }
 }
