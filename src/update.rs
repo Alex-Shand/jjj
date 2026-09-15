@@ -21,7 +21,7 @@ pub(crate) fn main(Args {}: Args) -> Result<()> {
         }
     }
 
-    let candidates = jj::log::<Vec<jj::Bookmark>>(
+    let candidates = jj::query::<Vec<jj::Bookmark>>(
         "heads(@- & bookmarks()) | root()",
         "self.bookmarks()",
     )?

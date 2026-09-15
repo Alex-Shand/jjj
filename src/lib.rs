@@ -62,7 +62,7 @@ pub fn main(Args { command }: Args) -> Result<()> {
     match command {
         Command::Install(args) => install::main(args),
         Command::Update(args) => update::main(args),
-        Command::Stash(_) => todo!(),
+        Command::Stash(args) => stash::main(args),
         Command::Backup(_) => todo!(),
         Command::Gc(_) => todo!(),
         Command::Push(_) => todo!(),
