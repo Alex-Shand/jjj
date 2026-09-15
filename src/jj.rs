@@ -15,6 +15,7 @@ pub(crate) mod types {
     #[derive(Debug, Copy, Clone)]
     pub(crate) enum RebaseSource {
         Revision,
+        Source,
     }
 }
 
@@ -54,6 +55,7 @@ pub(crate) fn rebase(
 ) -> Result<()> {
     let source = match source {
         types::RebaseSource::Revision => "-r",
+        types::RebaseSource::Source => "-s",
     };
     Command::new("jj")
         .args(["rebase", source, revset.as_ref(), "-o", target.as_ref()])

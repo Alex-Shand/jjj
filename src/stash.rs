@@ -47,7 +47,7 @@ pub(crate) fn main(Args { name_or_cmd, name }: Args) -> Result<()> {
             let Some(name) = name else {
                 bail!("`jj stash pop <name>` requires an argument");
             };
-            jj::rebase(RebaseSource::Revision, format!("stash/{name}"), "@")?;
+            jj::rebase(RebaseSource::Source, format!("stash/{name}"), "@")?;
             jj::next()?;
             jj::bookmark::delete(format!("stash/{name}"))?;
         }
