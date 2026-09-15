@@ -63,6 +63,13 @@ pub(crate) fn rebase(
     Ok(())
 }
 
+pub(crate) fn abandon(revset: impl AsRef<str>) -> Result<()> {
+    Command::new("jj")
+        .args(["abandon", revset.as_ref()])
+        .check_status()?;
+    Ok(())
+}
+
 pub(crate) mod config {
     use std::process::Command;
 

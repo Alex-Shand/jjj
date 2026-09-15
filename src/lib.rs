@@ -21,7 +21,6 @@
 
 use anyhow::Result;
 
-mod backup;
 mod branch;
 mod gc;
 mod install;
@@ -41,13 +40,18 @@ pub struct Args {
     command: Command,
 }
 
+//TODO: Swap
+// Get ID of @-
+// jj rebase -r @ -o @--
+// jj rebase -r <ID from step 1> -o @
+// jj next --edit
+
 #[derive(Debug, argh::FromArgs)]
 #[argh(subcommand)]
 enum Command {
     Install(install::Args),
     Update(update::Args),
     Stash(stash::Args),
-    Backup(backup::Args),
     Gc(gc::Args),
     Push(push::Args),
     Pull(pull::Args),
@@ -63,8 +67,7 @@ pub fn main(Args { command }: Args) -> Result<()> {
         Command::Install(args) => install::main(args),
         Command::Update(args) => update::main(args),
         Command::Stash(args) => stash::main(args),
-        Command::Backup(_) => todo!(),
-        Command::Gc(_) => todo!(),
+        Command::Gc(args) => gc::main(args),
         Command::Push(_) => todo!(),
         Command::Pull(_) => todo!(),
         Command::Branch(_) => todo!(),
