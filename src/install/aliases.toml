@@ -1,2 +1,5 @@
+init = ['git', 'init']
+back = ['prev', '--edit']
+forward = ['next', '--edit']
 install = ['util', 'exec', '--', 'jjj', 'install']
 update = ['util', 'exec', '--', 'jjj', 'update']

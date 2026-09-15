@@ -1,6 +1,9 @@
 use anyhow::Result;
 
-use crate::{jj, util};
+use crate::{
+    jj::{self, types::Bookmark},
+    util,
+};
 
 /// Attempts to determine which git branch the current commit stack came from
 /// and catches it up
@@ -9,7 +12,7 @@ use crate::{jj, util};
 pub(crate) struct Args {}
 
 pub(crate) fn main(Args {}: Args) -> Result<()> {
-    let dirty = jj::count("empty() & @")? == 0;
+    let dirty = jj::script::count("empty() & @")? == 0;
 
     if dirty {
         println!("Working set is not clean");
@@ -21,7 +24,7 @@ pub(crate) fn main(Args {}: Args) -> Result<()> {
         }
     }
 
-    let candidates = jj::query::<Vec<jj::Bookmark>>(
+    let candidates = jj::script::query::<Vec<Bookmark>>(
         "heads(@- & bookmarks()) | root()",
         "self.bookmarks()",
     )?
@@ -41,10 +44,10 @@ pub(crate) fn main(Args {}: Args) -> Result<()> {
         } else {
             &bookmark
         };
-        jj::create_bookmark("@-", bookmark)?;
+        jj::bookmark::create("@-", bookmark)?;
         return Ok(());
     };
 
-    jj::move_bookmark(bookmark, "@-")?;
+    jj::bookmark::move_(bookmark, "@-")?;
     Ok(())
 }

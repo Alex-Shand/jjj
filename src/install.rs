@@ -17,7 +17,7 @@ pub(crate) fn main(Args {}: Args) -> Result<()> {
         .parse::<DocumentMut>()
         .expect("Embedded aliases are invalid");
     let aliases = aliases.as_table();
-    let config = jj::config_path()?;
+    let config = jj::config::path()?;
     let mut contents = fs::read_to_string(&config)
         .with_context(|| anyhow!("Failed to read {config}"))?
         .parse::<DocumentMut>()

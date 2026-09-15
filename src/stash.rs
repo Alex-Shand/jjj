@@ -1,6 +1,9 @@
 use anyhow::{Result, bail, ensure};
 
-use crate::jj::{self, Bookmark, RebaseSource};
+use crate::jj::{
+    self,
+    types::{Bookmark, RebaseSource},
+};
 
 /// Set a bookmark to keep track of the current active commit then reset to the
 /// previous commit
@@ -17,10 +20,12 @@ pub(crate) fn main(Args { name_or_cmd, name }: Args) -> Result<()> {
     match name_or_cmd.as_str() {
         "list" => {
             ensure!(name.is_none(), "`jj stash list` doesn't take an argument");
-            let bookmarks =
-                jj::query::<Vec<Bookmark>>("bookmarks()", "self.bookmarks()")?
-                    .into_iter()
-                    .flatten();
+            let bookmarks = jj::script::query::<Vec<Bookmark>>(
+                "bookmarks()",
+                "self.bookmarks()",
+            )?
+            .into_iter()
+            .flatten();
             for bookmark in bookmarks {
                 if !bookmark.name.starts_with("stash/") {
                     continue;
@@ -44,14 +49,14 @@ pub(crate) fn main(Args { name_or_cmd, name }: Args) -> Result<()> {
             };
             jj::rebase(RebaseSource::Revision, format!("stash/{name}"), "@")?;
             jj::next()?;
-            jj::delete_bookmark(format!("stash/{name}"))?;
+            jj::bookmark::delete(format!("stash/{name}"))?;
         }
         _ => {
             ensure!(
                 name.is_none(),
                 "`jj stash <stash>` only takes one argument"
             );
-            jj::create_bookmark("@", format!("stash/{name_or_cmd}"))?;
+            jj::bookmark::create("@", format!("stash/{name_or_cmd}"))?;
             jj::prev()?;
         }
     }
