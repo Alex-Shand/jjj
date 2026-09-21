@@ -28,6 +28,7 @@ mod jj;
 mod pull;
 mod push;
 mod stash;
+mod swap;
 mod switch;
 mod update;
 mod util;
@@ -40,12 +41,6 @@ pub struct Args {
     command: Command,
 }
 
-//TODO: Swap
-// Get ID of @-
-// jj rebase -r @ -o @--
-// jj rebase -r <ID from step 1> -o @
-// jj next --edit
-
 #[derive(Debug, argh::FromArgs)]
 #[argh(subcommand)]
 enum Command {
@@ -53,6 +48,7 @@ enum Command {
     Update(update::Args),
     Stash(stash::Args),
     Gc(gc::Args),
+    Swap(swap::Args),
     Push(push::Args),
     Pull(pull::Args),
     Branch(branch::Args),
@@ -68,6 +64,7 @@ pub fn main(Args { command }: Args) -> Result<()> {
         Command::Update(args) => update::main(args),
         Command::Stash(args) => stash::main(args),
         Command::Gc(args) => gc::main(args),
+        Command::Swap(args) => swap::main(args),
         Command::Push(_) => todo!(),
         Command::Pull(_) => todo!(),
         Command::Branch(_) => todo!(),
