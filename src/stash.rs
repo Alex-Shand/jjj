@@ -1,8 +1,11 @@
 use anyhow::{Result, bail, ensure};
 
-use crate::jj::{
-    self,
-    types::{Bookmark, RebaseSource},
+use crate::{
+    jj::{
+        self,
+        types::{Bookmark, RebaseSource},
+    },
+    switch,
 };
 
 /// Set a bookmark to keep track of the current active commit then reset to the
@@ -49,6 +52,13 @@ pub(crate) fn main(Args { name_or_cmd, name }: Args) -> Result<()> {
             };
             jj::rebase(RebaseSource::Source, format!("stash/{name}"), "@")?;
             jj::next()?;
+            jj::bookmark::delete(format!("stash/{name}"))?;
+        }
+        "restore" => {
+            let Some(name) = name else {
+                bail!("`jj stash restore <name>` requires an argument");
+            };
+            switch::switch_to(format!("stash/{name}"))?;
             jj::bookmark::delete(format!("stash/{name}"))?;
         }
         _ => {

@@ -66,8 +66,8 @@ pub fn main(Args { command }: Args) -> Result<()> {
         Command::Gc(args) => gc::main(args),
         Command::Swap(args) => swap::main(args),
         Command::Push(_) => todo!(),
-        Command::Pull(_) => todo!(),
+        Command::Pull(args) => pull::main(args),
         Command::Branch(args) => branch::main(args),
-        Command::Switch(_) => todo!(),
+        Command::Switch(args) => switch::main(args),
     }
 }

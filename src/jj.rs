@@ -39,12 +39,23 @@ pub(crate) fn show(revset: impl AsRef<str>) -> Result<()> {
 }
 
 pub(crate) fn prev() -> Result<()> {
-    Command::new("jj").args(["prev", "--edit"]).check_status()?;
+    Command::new("jj")
+        .args(["prev", "--edit", "--ignore-immutable"])
+        .check_status()?;
     Ok(())
 }
 
 pub(crate) fn next() -> Result<()> {
-    Command::new("jj").args(["next", "--edit"]).check_status()?;
+    Command::new("jj")
+        .args(["next", "--edit", "--ignore-immutable"])
+        .check_status()?;
+    Ok(())
+}
+
+pub(crate) fn edit(revset: impl AsRef<str>) -> Result<()> {
+    Command::new("jj")
+        .args(["edit", "--ignore-immutable", revset.as_ref()])
+        .check_status()?;
     Ok(())
 }
 
