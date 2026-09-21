@@ -67,7 +67,7 @@ pub fn main(Args { command }: Args) -> Result<()> {
         Command::Swap(args) => swap::main(args),
         Command::Push(_) => todo!(),
         Command::Pull(_) => todo!(),
-        Command::Branch(_) => todo!(),
+        Command::Branch(args) => branch::main(args),
         Command::Switch(_) => todo!(),
     }
 }

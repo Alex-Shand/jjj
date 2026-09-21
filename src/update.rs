@@ -1,9 +1,6 @@
 use anyhow::Result;
 
-use crate::{
-    jj::{self, types::Bookmark},
-    util,
-};
+use crate::{branch, jj, util};
 
 /// Attempts to determine which git branch the current commit stack came from
 /// and catches it up
@@ -24,14 +21,7 @@ pub(crate) fn main(Args {}: Args) -> Result<()> {
         }
     }
 
-    let candidates = jj::script::query::<Vec<Bookmark>>(
-        "heads(@- & bookmarks()) | root()",
-        "self.bookmarks()",
-    )?
-    .into_iter()
-    .flatten()
-    .map(|b| b.name)
-    .collect::<Vec<_>>();
+    let candidates = branch::get_nearest_branches()?;
 
     let bookmark =
         util::choose("Multiple candidates branches found", &candidates)?;
