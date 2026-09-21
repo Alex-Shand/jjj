@@ -16,6 +16,7 @@ pub(crate) mod types {
     pub(crate) enum RebaseSource {
         Revision,
         Source,
+        Branch,
     }
 }
 
@@ -67,6 +68,7 @@ pub(crate) fn rebase(
     let source = match source {
         types::RebaseSource::Revision => "-r",
         types::RebaseSource::Source => "-s",
+        types::RebaseSource::Branch => "-b",
     };
     Command::new("jj")
         .args(["rebase", source, revset.as_ref(), "-o", target.as_ref()])
@@ -104,6 +106,8 @@ pub(crate) mod bookmark {
     use anyhow::Result;
     use command_ext::CommandExt as _;
 
+    use crate::jj::types::Bookmark;
+
     pub(crate) fn create(
         revset: impl AsRef<str>,
         name: impl AsRef<str>,
@@ -135,6 +139,35 @@ pub(crate) mod bookmark {
         Command::new("jj")
             .args(["bookmark", "delete", name.as_ref()])
             .check_status()?;
+        Ok(())
+    }
+
+    pub(crate) fn track(name: impl AsRef<str>) -> Result<()> {
+        Command::new("jj")
+            .args(["bookmark", "track", name.as_ref()])
+            .check_status()?;
+        Ok(())
+    }
+
+    pub(crate) fn list() -> Result<Vec<Bookmark>> {
+        Ok(super::script::query::<Vec<Bookmark>>(
+            "bookmarks()",
+            "self.bookmarks()",
+        )?
+        .into_iter()
+        .flatten()
+        .collect())
+    }
+}
+
+pub(crate) mod git {
+    use std::process::Command;
+
+    use anyhow::Result;
+    use command_ext::CommandExt as _;
+
+    pub(crate) fn fetch() -> Result<()> {
+        Command::new("jj").args(["git", "fetch"]).check_status()?;
         Ok(())
     }
 }
