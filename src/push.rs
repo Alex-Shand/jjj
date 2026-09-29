@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use anyhow::Result;
 
-use crate::{branch, jj, util};
+use crate::{branch, git, jj, util};
 
 /// With no argument:
 ///   Find the nearest branch:
@@ -68,6 +68,7 @@ fn push_new_bookmark(name: &str) -> Result<()> {
         "@-"
     };
     jj::git::push::named(name, target)?;
+    git::set_upstream(name)?;
     Ok(())
 }
 
@@ -91,6 +92,7 @@ fn try_push_branch(name: &str) -> Result<()> {
 
     if can_push {
         jj::git::push::bookmark(name)?;
+        git::set_upstream(name)?;
     }
 
     Ok(())

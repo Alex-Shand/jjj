@@ -1,6 +1,6 @@
 use anyhow::Result;
 
-use crate::{branch, jj, util};
+use crate::{branch, git, jj, util};
 
 /// Attempts to determine which git branch the current commit stack came from
 /// and catches it up
@@ -39,5 +39,6 @@ pub(crate) fn main(Args {}: Args) -> Result<()> {
     };
 
     jj::bookmark::move_(bookmark, "@-")?;
+    git::checkout(bookmark)?;
     Ok(())
 }

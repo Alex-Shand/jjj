@@ -23,6 +23,7 @@ use anyhow::Result;
 
 mod branch;
 mod gc;
+mod git;
 mod install;
 mod jj;
 mod pull;
