@@ -1,6 +1,7 @@
 init = ['git', 'init']
 back = ['prev', '--edit']
 forward = ['next', '--edit']
+all = ['log', '-r', '::@']
 install = ['util', 'exec', '--', 'jjj', 'install']
 update = ['util', 'exec', '--', 'jjj', 'update']
 stash = ['util', 'exec', '--', 'jjj', 'stash']
