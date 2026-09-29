@@ -14,6 +14,7 @@ pub(crate) fn set_upstream(branch: impl Display) -> Result<()> {
     Command::new("git")
         .arg("branch")
         .arg(format!("--set-upstream-to=origin/{branch}"))
+        .arg(branch.to_string())
         .check_status()?;
     Ok(())
 }
