@@ -170,6 +170,31 @@ pub(crate) mod git {
         Command::new("jj").args(["git", "fetch"]).check_status()?;
         Ok(())
     }
+
+    pub(crate) mod push {
+        use std::{fmt::Display, process::Command};
+
+        use anyhow::Result;
+        use command_ext::CommandExt as _;
+
+        pub(crate) fn named(
+            name: impl Display,
+            revset: impl Display,
+        ) -> Result<()> {
+            Command::new("jj")
+                .args(["git", "push", "--named"])
+                .arg(format!("{name}={revset}"))
+                .check_status()?;
+            Ok(())
+        }
+
+        pub(crate) fn bookmark(name: impl AsRef<str>) -> Result<()> {
+            Command::new("jj")
+                .args(["git", "push", "--bookmark", name.as_ref()])
+                .check_status()?;
+            Ok(())
+        }
+    }
 }
 
 pub(crate) mod script {

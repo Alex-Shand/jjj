@@ -65,7 +65,7 @@ pub fn main(Args { command }: Args) -> Result<()> {
         Command::Stash(args) => stash::main(args),
         Command::Gc(args) => gc::main(args),
         Command::Swap(args) => swap::main(args),
-        Command::Push(_) => todo!(),
+        Command::Push(args) => push::main(args),
         Command::Pull(args) => pull::main(args),
         Command::Branch(args) => branch::main(args),
         Command::Switch(args) => switch::main(args),
