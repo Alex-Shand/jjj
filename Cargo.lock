@@ -57,7 +57,7 @@ checksum = "bbbad30e4b4c14a39e3cc8aed085a12a327257c316619c93581e017bc52be591"
 [[package]]
 name = "command-ext"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/command-ext.git#bfc4b573c8002e03476a7efd13c76d291f0a1b60"
+source = "git+https://github.com/Alex-Shand/command-ext.git#9130dd88b9c3438562e7b275249cbdb96585aac8"
 dependencies = [
  "camino",
  "errors",
@@ -83,7 +83,7 @@ checksum = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
 [[package]]
 name = "errors"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/errors.git#4d59baf755e13b3840ed4bf774a5ce977dcde5cd"
+source = "git+https://github.com/Alex-Shand/errors.git#c2450efe0753b7f3cf5dab3602d0ee453f205a2a"
 dependencies = [
  "errors-macros",
  "snafu",
@@ -92,7 +92,7 @@ dependencies = [
 [[package]]
 name = "errors-macros"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/errors.git#4d59baf755e13b3840ed4bf774a5ce977dcde5cd"
+source = "git+https://github.com/Alex-Shand/errors.git#c2450efe0753b7f3cf5dab3602d0ee453f205a2a"
 dependencies = [
  "proc",
 ]
@@ -153,7 +153,7 @@ checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
 [[package]]
 name = "proc"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/proc.git#68142d871954f388a8b369e7022b7ae2d987569a"
+source = "git+https://github.com/Alex-Shand/proc.git#ba848674316cf159c55c4b21c537072e2995a01c"
 dependencies = [
  "proc_attribute",
  "proc_common",
@@ -183,7 +183,7 @@ dependencies = [
 [[package]]
 name = "proc_attribute"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/proc.git#68142d871954f388a8b369e7022b7ae2d987569a"
+source = "git+https://github.com/Alex-Shand/proc.git#ba848674316cf159c55c4b21c537072e2995a01c"
 dependencies = [
  "proc_common",
 ]
@@ -191,7 +191,7 @@ dependencies = [
 [[package]]
 name = "proc_common"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/proc.git#68142d871954f388a8b369e7022b7ae2d987569a"
+source = "git+https://github.com/Alex-Shand/proc.git#ba848674316cf159c55c4b21c537072e2995a01c"
 dependencies = [
  "proc-macro-crate",
  "proc-macro2",
@@ -203,7 +203,7 @@ dependencies = [
 [[package]]
 name = "proc_derive"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/proc.git#68142d871954f388a8b369e7022b7ae2d987569a"
+source = "git+https://github.com/Alex-Shand/proc.git#ba848674316cf159c55c4b21c537072e2995a01c"
 dependencies = [
  "convert_case",
  "proc_attribute",
@@ -213,7 +213,7 @@ dependencies = [
 [[package]]
 name = "proc_function"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/proc.git#68142d871954f388a8b369e7022b7ae2d987569a"
+source = "git+https://github.com/Alex-Shand/proc.git#ba848674316cf159c55c4b21c537072e2995a01c"
 dependencies = [
  "proc_attribute",
  "proc_common",
@@ -222,7 +222,7 @@ dependencies = [
 [[package]]
 name = "proc_parse"
 version = "0.1.0"
-source = "git+https://github.com/Alex-Shand/proc.git#68142d871954f388a8b369e7022b7ae2d987569a"
+source = "git+https://github.com/Alex-Shand/proc.git#ba848674316cf159c55c4b21c537072e2995a01c"
 dependencies = [
  "proc_common",
  "proc_derive",
